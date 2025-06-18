@@ -10,7 +10,7 @@ llm_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 # The globally accessible list of tools/resources that the MCP client finds on the server.
 functions = []
 function_uris = []
-# Add messages as a global thing too
+messages = []
 
 async def llm_driven_mcp():
 	"""An OpenAI LLM chooses which resource(s), defined on
@@ -37,9 +37,10 @@ async def llm_driven_mcp():
 
 			try:
 				# Ask the LLM to pick an MCP resource based on the prompt
+				messages.append({"role": "user", "content": prompt})
 				response = llm_client.chat.completions.create(
 					model="gpt-4.1-mini",
-					messages=[{"role": "user", "content": prompt}],
+					messages=messages,
 					tools=functions,
 					tool_choice="auto"
 				)
@@ -68,21 +69,18 @@ async def llm_driven_mcp():
 
 				resource_call_result = await client.read_resource(trimmed_uri)
 
-				# Send all the results back to the LLM's context, including the data from the tool/resource call
+				# Send all the messages back to the LLM's context, including the data from the tool/resource call
+				messages.append(response.choices[0].message) # The LLM's tool_call message from earlier, where it expresses that it wants to use a tool/resource
+				messages.append({
+					"role": "tool",
+					"tool_call_id": tool_call.id,
+					"content": str(resource_call_result)
+				}) # The data returned from when the tool/resource was actually called
 				followup = llm_client.chat.completions.create(
 					model="gpt-4.1-mini",
-					messages=[
-						{"role": "user", "content": prompt}, # The original prompt
-						response.choices[0].message, # The LLM assistant's tool_call message from earlier
-						{
-							"role": "tool",
-							"tool_call_id": tool_call.id,
-							"content": str(resource_call_result)
-						} # The result of the tool/resource call
-					],
+					messages=messages,
 					tools=functions,
 					tool_choice="auto"
-
 				)
 
 				print (followup.choices[0].message.content)
