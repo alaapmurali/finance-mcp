@@ -7,6 +7,11 @@ from fastmcp.client.transports import PythonStdioTransport
 load_dotenv()
 llm_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
+# The globally accessible list of tools/resources that the MCP client finds on the server.
+functions = []
+function_uris = []
+# Add messages as a global thing too
+
 async def llm_driven_mcp():
 	"""An OpenAI LLM chooses which resource(s), defined on
 	the MCP server and surfaced to the AI via the MCP client,
@@ -22,24 +27,7 @@ async def llm_driven_mcp():
 	async with Client(PythonStdioTransport("server.py")) as client:
 
 		# The MCP client fetches all available resources from the MCP server and organizes them.
-		templates = await client.list_resource_templates()
-		functions = []
-		function_uris = []
-
-		for tmp in templates:
-			functions.append({
-				"type": "function",
-				"function": {
-					"name": tmp.name,
-					"description": tmp.description[2:len(tmp.description)-2],
-					"parameters": {
-						"type": "object",
-						"properties": {"ticker": {"type": "string"}},
-						"required": ["ticker"]
-					}
-				}
-			})
-			function_uris.append(tmp.uriTemplate)
+		await update_tools(client)
 		
 		# The user asks the LLM a question and the LLM uses the tools it has available, if applicable
 		while True:
@@ -97,13 +85,31 @@ async def llm_driven_mcp():
 
 				)
 
-				print ({followup.choices[0].message.content})
+				print (followup.choices[0].message.content)
 
 				# To enable more back and forth with the AI, check whether tool_calls in followup.choices[0].message.tool_calls is empty
 				# or if the LLM want to use another tool/resource.
 			except:
 				print ("Something went wrong. Please type a financial question.")
 				continue
+
+async def update_tools(mcp_client) -> Client:
+	templates = await mcp_client.list_resource_templates()
+
+	for tmp in templates:
+		functions.append({
+			"type": "function",
+			"function": {
+				"name": tmp.name,
+				"description": tmp.description[2:len(tmp.description)-2],
+				"parameters": {
+					"type": "object",
+					"properties": {"ticker": {"type": "string"}},
+					"required": ["ticker"]
+				}
+			}
+		})
+		function_uris.append(tmp.uriTemplate)
 
 
 if __name__ == "__main__":
