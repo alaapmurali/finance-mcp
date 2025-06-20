@@ -14,6 +14,10 @@ To use correctly, make sure your prompts specifically reference earnings yield (
 The LLM's memory context is update throughout the course of your conversation, so you can referrence older prompts or responses.
 
 ### A real question-answer chain using this tool
+
+> [!TIP]
+> Although I'm just showing the conversation flow below, when you use the tool you will be able to see the actual tool calls the MCP CLient makes to the MCP server.
+
 **User:**
 `What's the difference between NVIDIA and AMD when it comes to earnings yield and tangible ROI?`
 
@@ -148,9 +152,6 @@ These companies show relatively strong earnings yields generally in the 4.4% to 
 
 Overall, the consumer non-cyclicals sector, represented by these major companies, appears financially healthy with solid profitability and effective use of tangible capital. This reflects the sector's typically stable demand and consistent cash flow characteristics.
 ```
-
-> [!TIP]
-> Although I'm just showing the conversation flow above, when you use the tool you will be able to see the actual tool calls the MCP CLient makes to the MCP server.
 
 ## Setup
 This is a command line tool--I plan to build a UI at some point.
