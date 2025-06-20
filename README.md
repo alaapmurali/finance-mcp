@@ -16,7 +16,7 @@ The LLM's memory context is update throughout the course of your conversation, s
 ### A real question-answer chain using this tool
 
 > [!TIP]
-> Although I'm just showing the conversation flow below, when you use the tool you will be able to see the actual tool calls the MCP CLient makes to the MCP server.
+> Although I'm just showing the conversation flow below, when you use the tool you will be able to see the actual tool calls the MCP client makes to the MCP server.
 
 **User:**
 `What's the difference between NVIDIA and AMD when it comes to earnings yield and tangible ROI?`
