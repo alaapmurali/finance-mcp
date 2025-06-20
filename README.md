@@ -13,7 +13,7 @@ To use correctly, make sure your prompts specifically reference earnings yield (
 
 The LLM's memory context is update throughout the course of your conversation, so you can referrence older prompts or responses.
 
-### A real question-answer chain using this tool
+### An example (but actual) question-answer chain using this tool
 
 > [!TIP]
 > Although I'm just showing the conversation flow below, when you use the tool you will be able to see the actual tool calls the MCP client makes to the MCP server.
