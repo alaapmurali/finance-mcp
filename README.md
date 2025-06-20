@@ -4,7 +4,7 @@ MCP server for my financial metrics API, and an MCP client for LLMs that interfa
 ## Overview
 In this project I built an MCP server and MCP client that OpenAI's models can use to interface with this [Financial Metrics API](https://github.com/alaapmurali/financial-metrics-app) I built.
 
-For now, it only works with OpenAI's models but I plan to expand it to others.
+For now, the MCP client only works with OpenAI's GPT 4.1 Mini model but I plan to build clients that work with other models and companies.
 
 ## Use Cases
 Since this project is meant to use the Financial Metrics API as a tool to answer financial questions, I've blocked LLMs from responding to prompts that don't require using this tool. This protects your OpenAI token limit by blocking prompts that can be answered using ChatGPT or another LLM product directly. I plan to build a cleaner solution in due time, but for now this does the job.
