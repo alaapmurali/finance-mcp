@@ -16,6 +16,7 @@ The LLM's memory context is update throughout the course of your conversation, s
 ### A real question-answer chain using this tool
 **User:**
 `What's the difference between NVIDIA and AMD when it comes to earnings yield and tangible ROI?`
+
 **LLM:**
 ```
 The differences between NVIDIA and AMD in terms of earnings yield and return on tangible capital are as follows:
@@ -33,6 +34,7 @@ NVIDIA has a higher earnings yield and a significantly higher return on tangible
 
 **User:**
 `Compare the tangible ROI of the 5 largest market cap companies in medical tech.`
+
 **LLM:**
 ```
 The tangible Return on Tangible Capital (ROTC) for the 5 largest medical tech companies by market cap are as follows:
@@ -48,6 +50,7 @@ Stryker has the highest tangible ROI among these companies, followed by Becton D
 
 **User:**
 `Compare the 3 largest companies in the GPU chip industry with the 3 largest companies in the med tech industry in terms of earnings yield and tangible ROI.`
+
 **LLM:**
 ```
 Here's the comparison of the 3 largest companies in the GPU chip industry (NVIDIA, AMD, Intel) with the 3 largest companies in the medical tech industry (Medtronic, Stryker, Intuitive Surgical) in terms of earnings yield and return on tangible capital (ROTC):
@@ -86,6 +89,7 @@ If you want, I can provide more details or comparisons.
 
 **User:**
 `Now do the same thing you just did, but instead of med tech companies use the 3 biggest banks.`
+
 **LLM:**
 ```
 Here's the comparison of the 3 largest companies in the GPU chip industry with the 3 largest companies in the bank industry in terms of earnings yield and return on tangible capital (ROTC):
@@ -122,6 +126,7 @@ Summary:
 
 **User:**
 `What can you tell me about the health of the consumer non-cyclicals sector based on the earnings yield and tanbile ROI for a few top companies in that sector?`
+
 **LLM:**
 ```
 For the consumer non-cyclicals sector, looking at some of the top companies:
