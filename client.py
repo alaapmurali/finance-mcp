@@ -83,7 +83,7 @@ async def llm_driven_mcp():
 
 				# Update the LLM's context and send, including any data from tool/resource calls (if called)
 				followup = llm_client.chat.completions.create(
-					model="gpt-4.1-mini",
+					model="gpt-5-mini",
 					messages=messages,
 					tools=functions,
 					tool_choice="auto"
